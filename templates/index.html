@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+
+    <body>
+        <h1>Hello world</h1>
+
+        {% for key, parameter in cube_params.items() %}
+        <div class="params">
+            <h3> {{ key }} = {{ parameter }} </h3>
+        </div>
+        {% endfor %}
+    </body>
+</html>
