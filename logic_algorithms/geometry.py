@@ -90,6 +90,8 @@ class Ellipse():
         #created specs
 
 
+##########################################---3D---##########################################
+
 class Parallelepiped():
 
     parallelepiped_squares = {}
@@ -137,4 +139,30 @@ class Parallelepiped():
     def parallelepiped_volume(cls, parallelepiped_length, parallelepiped_width, parallelepiped_height):
         return parallelepiped_length*parallelepiped_width*parallelepiped_height
 
+class Sphere():
     
+    def __init__(self, sphere_radius):
+        self.sphere_radius = sphere_radius
+
+        #creted specs
+
+    @classmethod
+    def sphere_volume(cls, sphere_radius):
+        return (4/3)*pi*(sphere_radius**3)
+
+        #if diameter included, sphere_volume = (1/6)*pi(sphere_diameter**3)
+    
+    @classmethod
+    def sphere_surface_square(cls, sphere_radius):
+        return 4*pi*(sphere_radius**2)
+
+        #if diameter included, sphere_surface_square = pi*(sphere_diameter**2)
+
+    @classmethod
+    def sphere_segment_surface_square(cls, sphere_radius, sphere_segment_height):
+        return 2*pi*sphere_radius*sphere_segment_height
+
+    @classmethod
+    def sphere_segment_volume(cls, sphere_radius, sphere_segment_height):
+        return (((sphere_segment_height**2)*pi)/3)*((3*sphere_radius)-sphere_segment_height)
+
