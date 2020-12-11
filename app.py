@@ -1,7 +1,8 @@
 from flask import Flask, redirect, render_template
 
 from db import db
-from logic_algorithms.geometry import GeometrySolutions, Rectangle, Circle, Parallelepiped
+from logic_algorithms.geometry import GeometrySolutions, Rectangle, Circle, Parallelepiped, Sphere
+from processing.creating_tasks import CreateTasks
 
 
 app = Flask(__name__)
@@ -44,7 +45,37 @@ def index():
     print("Parallelepiped side square: " + str(parallelepiped_specs.parallelepiped_side_square))
     print("Parallelepiped volume: " + str(parallelepiped_specs.parallelepiped_volume))
 
+
+    print("---------------------------------Sphere----------------------------------------------")
+    sphere_specs = Sphere(10, 2)
+    print("Sphere_radius: " + str(sphere_specs.sphere_radius))
+    print("Sphere_segment_height: " + str(sphere_specs.sphere_segment_height))
+    print("sphere_volume: " + str(sphere_specs.sphere_volume))
+    print("sphere_surface_square: " + str(sphere_specs.sphere_surface_square))
+    print("sphere_segment_surface_square: " + str(sphere_specs.sphere_segment_surface_square))
+    print("sphere_segment_volume: " + str(sphere_specs.sphere_segment_volume))
+
+
+    print("-----------------------------------Test_creation-------------------------------------------------")
+
+    test_tasks = CreateTasks(5)
+
+    for task in test_tasks.tasks:
+        print(task.classSpecs)
+
+
+    print("-----------------------------------PARSER-------------------------------------------------")
+
+    print(test_tasks.task_parser())
+
+
+
     return render_template('index.html', cube_params=cube_params)
+
+
+@app.route('/tasks')
+def solve_tasks():
+    return render_template('solve_tasks.html')
 
 
 
