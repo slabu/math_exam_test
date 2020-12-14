@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="{{ url_for( 'static', filename='css/style.css', v=8) }}">
+    </head>
+
+    <body>
+        <h1>Hello world</h1>
+
+        
+        <div class="tasks_list">
+            <form method="post" action="/solved_tasks">
+            {% for task in tasks %}
+            <div class="task_body">
+                <div class="task_problem">
+                    <h2> {{ task.task_text }} </h2>
+                </div>
+                
+                
+                    <div class="answers_block">
+                        <div class="answer_1">
+                            
+                            <h3><input type="radio" name="{{task.task_id}}" value="{{task.answer_1}}"> {{ task.answer_1 }} </h3>
+                        </div>
+
+                        <div class="answer_2">
+                            <h3><input type="radio" name="{{task.task_id}}" value="{{task.answer_2}}"> {{ task.answer_2 }} </h3>
+                        </div>
+
+                        <div class="answer_3">
+                            <h3><input type="radio" name="{{task.task_id}}" value="{{task.answer_3}}"> {{ task.answer_3 }} </h3>
+                        </div>
+
+                        <div class="answer_4">
+                            <h3><input type="radio" name="{{task.task_id}}" value="{{task.answer_4}}"> {{ task.answer_4 }} </h3>
+                        </div>
+
+                        <div class="answer_5">
+                            <h3><input name="{{task.task_id}}" value="None" type="hidden" checked> </h3>
+                        </div>
+                    </div>
+
+                    
+                
+            </div>
+            {% endfor %}
+            <div class="submit_button_area">
+                <div class="submit_button">
+                    <button type="submit">Відправити на перевірку</button>
+                </div>
+            </div>
+                </form>
+        </div>
+
+
+
+
+
+        
+       
+
+
+
+    </body>
+</html>

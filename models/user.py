@@ -7,7 +7,7 @@ class UserModel(db.Model, UserMixin):
 
     user_id = db.Column(db.Integer, primary_key=True)
     user_login = db.Column(db.String(50), nullable=False, unique=True)
-    user_password = db.Column(db.string(100), nullable=False)
+    user_password = db.Column(db.String(100), nullable=False)
     user_access_level = db.Column(db.String(50), nullable=False)
 
     def get_id(self):

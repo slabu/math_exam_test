@@ -1,0 +1,89 @@
+body{
+    color: green;
+    background-color: black;
+}
+
+.task_list{
+    width: 50%;
+    left: 25%;
+    top: 50px;
+    height: max-content;
+
+    position: relative;
+}
+
+.task_body{
+    width: 100%;
+    height: max-content;
+    border-style: groove;
+    margin-bottom: 20px;
+    padding-bottom: 160px;
+
+
+    position: relative;
+    background-color: #cbffc4;
+
+    
+}
+
+.task_problem{
+    text-align: left;
+}
+
+.answers_block{
+    position: relative;
+    
+}
+
+.answer_1{
+    position: relative;
+    float: left;
+
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 5px;
+    border-color: black;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 20px;
+    height: max-content;
+}
+
+.answer_2{
+    position: relative;
+    float: left;
+
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 5px;
+    border-color: black;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 20px;
+}
+
+.answer_3{
+    position: relative;
+    float: left;
+    
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 5px;
+    border-color: black;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 20px;
+}
+
+.answer_4{
+    position: relative;
+    float: left;
+
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 5px;
+    border-color: black;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 20px;
+}
