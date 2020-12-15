@@ -6,6 +6,7 @@
 
     <body>
 
+        
         <div class="header">
            
             <div class="nav_buttons">
@@ -18,11 +19,7 @@
                     <a href="{{url_for('history')}}">Мої проходження</a>
                 </div>
 
-                {% if user.find_by_id(current_user.get_id()).user_access_level == 'admin' %}
-                <div class="create_tasks_button">
-                    <a href="{{ url_for('create_pull_of_tasks') }}">Додати набір завдань</a>
-                </div>
-                {% endif %}
+                
 
                 {% if user.find_by_id(current_user.get_id()).user_access_level == 'expert' %}
                 <div class="add_new_task">
@@ -51,17 +48,38 @@
                 {% endif %}
             </div>
         </div>
+        
 
-
-        <div class="index_title">
-            <h1> Вітання! </h1>
+        <div class="name_of_results">
+            <h1>Створення нового набору завдань</h1>
         </div>
+        
+        
+        <form method="post" action="create_tasks">
 
-        <div class="start_testing">
-            <div class="start_button">
-            <a href="{{ url_for('solve_tasks') }}">Розпочати тестування</a>
+        <div class="count_of_tasks_field">
+
+            <div class="count_description">
+                <h3> Створити </h3>
+            </div>
+
+            <input type="number" name="count" min="1">
+
+            <div class="count_post_description">
+                <h3> наборів завдань </h3>
             </div>
         </div>
+
+        <div class="approval_button">
+            <button type="submit">Створити набори</button>
+        </div>
+
+        </form>
+
+        
+       
+
+
 
     </body>
 </html>

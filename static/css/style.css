@@ -1,11 +1,20 @@
 body{
-    color: green;
-    background-color: black;
+    color: black;
+    background-color: #fff79e;
 }
 
-.task_list{
-    width: 50%;
-    left: 25%;
+.name_of_results{
+    text-align: center;
+    padding-top: 50px;
+}
+
+.name_of_results-h1{
+    padding-bottom: 0;
+}
+
+.tasks_list{
+    width: 75%;
+    left: 22%;
     top: 50px;
     height: max-content;
 
@@ -13,11 +22,11 @@ body{
 }
 
 .task_body{
-    width: 100%;
+    width: 75%;
     height: max-content;
     border-style: groove;
     margin-bottom: 20px;
-    padding-bottom: 160px;
+    padding-bottom: 180px;
 
 
     position: relative;
@@ -39,10 +48,8 @@ body{
     position: relative;
     float: left;
 
-    border-style: solid;
-    border-radius: 5px;
-    border-width: 5px;
-    border-color: black;
+    
+    
     padding-left: 10px;
     padding-right: 10px;
     margin-left: 20px;
@@ -53,10 +60,8 @@ body{
     position: relative;
     float: left;
 
-    border-style: solid;
-    border-radius: 5px;
-    border-width: 5px;
-    border-color: black;
+    
+    
     padding-left: 10px;
     padding-right: 10px;
     margin-left: 20px;
@@ -66,10 +71,8 @@ body{
     position: relative;
     float: left;
     
-    border-style: solid;
-    border-radius: 5px;
-    border-width: 5px;
-    border-color: black;
+    
+    
     padding-left: 10px;
     padding-right: 10px;
     margin-left: 20px;
@@ -79,11 +82,305 @@ body{
     position: relative;
     float: left;
 
-    border-style: solid;
-    border-radius: 5px;
-    border-width: 5px;
-    border-color: black;
+    
+    
     padding-left: 10px;
     padding-right: 10px;
     margin-left: 20px;
+}
+
+.statistic_info{
+    position: relative;
+}
+
+.chosen_answer{
+    position: absolute;
+    top: 80px;
+    padding: 0;
+    
+}
+
+.correct_answer{
+    position: absolute;
+    top: 110px;
+    padding: 0;
+}
+
+.mark{
+    position: absolute;
+    top: 140px;
+    padding: 0;
+}
+
+.save_button{
+    position: relative;
+    top: 10%;
+    left: 47%;
+    float: left;
+}
+
+/* login_page styles */
+
+.name_of_page{
+    width: max-content;
+    height: max-content;
+    position: absolute;
+    left: 43%;
+    top: 10%;
+}
+
+.flash_messages{
+    width: max-content;
+    height: max-content;
+    left: 38%;
+    top: 50%;
+    position: absolute;
+    color: red;
+}
+
+
+.login_form{
+    width: 100%;
+    height: max-content;
+}
+
+.login_field{
+    top: 20%;
+    padding: 20px;
+    position: absolute;
+    left: 35%;
+}
+
+.password_field{
+    top: 27%;
+    padding: 20px;
+    position: absolute;
+    left: 35%;
+}
+
+.register_redirect{
+    width: 180px;
+    height: 36px;
+    top: 42%;
+    position: absolute;
+    left: 48.5%;
+    border-width: 2px;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: #767676;
+    text-align: center;
+    background-color: #efefef;
+}
+
+.register_redirect a{
+    font-size: 30px;
+    text-decoration: none;
+    color: black;
+}
+
+.login_button{
+    top: 40%;
+    padding: 20px;
+    position: absolute;
+    left: 35%;
+}
+
+.login_button input{
+    width: 180px;
+    height: 40px;
+    border-style: solid;
+    border-radius: 10px;
+    font-size: 30px;
+
+}
+
+/* register page */
+
+.password_field_repeat{
+    top: 34%;
+    padding: 20px;
+    position: absolute;
+    left: 35%;
+}
+
+.password_field_repeat input{
+    width: 400px;
+    height: 40px;
+    border-style: solid;
+    border-color: blue;
+    border-radius: 30px;
+    font-size: 30px;
+    padding-left: 20px;
+}
+
+.login_field input{
+    width: 400px;
+    height: 40px;
+    border-style: solid;
+    border-color: blue;
+    border-radius: 30px;
+    font-size: 30px;
+    padding-left: 20px;
+}
+
+.password_field input{
+    width: 400px;
+    height: 40px;
+    border-style: solid;
+    border-color: blue;
+    border-radius: 30px;
+    font-size: 30px;
+    padding-left: 20px;
+}
+
+/*-------------------------------- header styles --------------------------------*/
+
+.header{
+    width: 80%;
+    height: 40px;
+    background-color: #4dc96e;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-right-style: solid;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    position: fixed;
+    top: 0px;
+    left: 10%;
+    z-index: 9999;
+}
+
+.nav_buttons{
+    display: inline;
+    float: left;
+    margin-top: 6px;
+    margin-left: 5px;
+    font-size: 25px;
+    text-align: center;
+}
+
+.home_button{
+    width: max-content;
+    border-right-style: ridge;
+    display: inline;
+    float: left;
+}
+
+.my_posts{
+    width: max-content;
+    border-right-style: ridge;
+    float: left;
+    display: inline;
+}
+
+.create_tasks_button{
+    width: max-content;
+    border-right-style: ridge;
+    float: left;
+    display: inline;
+}
+
+.add_new_task{
+    width: max-content;
+    border-right-style: ridge;
+    float: left;
+    display: inline;
+}
+
+.add_post_button{
+    width: max-content;
+    border-right-style: ridge;
+    float: left;
+    display: inline;
+}
+
+.log_buttons{
+    display: inline;
+    float: right;
+    margin-top: 6px;
+    margin-right: 5px;
+    text-align: center;
+    font-size: 25px;
+}
+
+.login{
+    float: right;
+    border-left-style: ridge;
+}
+
+.register{
+    float: right;
+    border-left-style: ridge;
+}
+
+.logged_in_user{
+    float: right;
+    border-left-style: ridge;
+}
+
+.logout{
+    float: right;
+    border-left-style: ridge;
+}
+
+/* --------------------- admin page --------------------- */
+
+.count_of_tasks_field{
+    position: relative;
+    left: 45%;
+    float: left;
+}
+
+.count_of_tasks_field input{
+    width: 100px;
+    height: 30px;
+    font-size: 20;
+    float: left;
+    top: -20px;
+}
+
+.count_description{
+    position: relative;
+    float: left;
+    left: -20px;
+    top: -15px;
+}
+
+.count_post_description{
+    position: relative;
+    float: left;
+    top: -15px;
+    left: 10px;
+}
+
+.approval_button{
+    position: relative;
+    left:30%;
+    top: 50px;
+}
+
+.approval_button button{
+    width: 180px;
+    height: 50px;
+    font-size: 20;
+}
+
+.index_title{
+    text-align: center;
+    padding-top: 100px;
+}
+
+.start_button{
+    text-align: center;
+    padding-top: 30px;
+}
+
+.start_button a{
+    border-style: solid;
+    border-width: 2px;
+    border-color: blue;
+    border-radius: 5px;
+    background-color: blue;
+    color: white;
+    font-size: 25;
 }

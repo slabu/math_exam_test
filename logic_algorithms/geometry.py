@@ -57,11 +57,11 @@ class Rectangle():
                     'problem': 'Дано прямокутник з наступними характеристиками:',
                     'figure_specs': 
                                     {
-                                        'rectangle_length': str(self.rectangle_length),
-                                        'rectangle_width': str(self.rectangle_width),
-                                        'rectangle_square': str(self.rectangle_square),
-                                        'rectangle_diagonal': str(self.rectangle_diagonal),
-                                        'rectangle_perimeter': str(self.rectangle_perimeter)
+                                        'довжина': str(self.rectangle_length),
+                                        'ширина': str(self.rectangle_width),
+                                        'площа': str(self.rectangle_square),
+                                        'діагональ': str(self.rectangle_diagonal),
+                                        'периметр': str(self.rectangle_perimeter)
                     }
                 }
 
@@ -94,9 +94,9 @@ class Circle():
                     'problem': 'Дано коло з наступними характеристиками:',
                     'figure_specs': 
                                     {
-                                        'circle_radius': str(self.circle_radius),
-                                        'circle_square': str(self.circle_square),
-                                        'circle_length': str(self.circle_length)
+                                        'радіус кола': str(self.circle_radius),
+                                        'площа кола': str(self.circle_square),
+                                        'довжина кола': str(self.circle_length)
                     }
                 }
 
@@ -159,16 +159,16 @@ class Parallelepiped():
                     'problem': 'Дано Параллелепіпед з наступними характеристиками:',
                     'figure_specs': 
                                     {
-                                        'parallelepiped_length': str(self.parallelepiped_length),
-                                        'parallelepiped_width': str(self.parallelepiped_width),
-                                        'parallelepiped_height': str(self.parallelepiped_height),
-                                        'parallelepiped_top_side_square': str(self.parallelepiped_top_side_square),
-                                        'parallelepiped_front_side_square': str(self.parallelepiped_front_side_square),
-                                        'parallelepiped_side_square': str(self.parallelepiped_side_square),
-                                        'parallelepiped_top_side_diagonal': str(self.parallelepiped_top_side_diagonal),
-                                        'parallelepiped_front_side_diagonal': str(self.parallelepiped_front_side_diagonal),
-                                        'parallelepiped_side_diagonal': str(self.parallelepiped_side_diagonal),
-                                        'parallelepiped_volume': str(self.parallelepiped_volume)
+                                        'довжина': str(self.parallelepiped_length),
+                                        'ширина': str(self.parallelepiped_width),
+                                        'висота': str(self.parallelepiped_height),
+                                        'площа верхньої сторони': str(self.parallelepiped_top_side_square),
+                                        'площа передньої сторони': str(self.parallelepiped_front_side_square),
+                                        'площа бокової сторони': str(self.parallelepiped_side_square),
+                                        'діагональ верхньої сторони': str(self.parallelepiped_top_side_diagonal),
+                                        'діагональ передньої сторони': str(self.parallelepiped_front_side_diagonal),
+                                        'діагональ бокової сторони': str(self.parallelepiped_side_diagonal),
+                                        'об\'єм': str(self.parallelepiped_volume)
                     }
                 }
 
@@ -216,12 +216,12 @@ class Sphere():
                     'problem': 'Дано Сферу з наступними характеристиками:',
                     'figure_specs': 
                                     {
-                                        'sphere_radius': str(self.sphere_radius),
-                                        'sphere_segment_height': str(self.sphere_segment_height),
-                                        'sphere_volume': str(self.sphere_volume),
-                                        'sphere_surface_square': str(self.sphere_surface_square),
-                                        'sphere_segment_surface_square': str(self.sphere_segment_surface_square),
-                                        'sphere_segment_volume': str(self.sphere_segment_volume)
+                                        'радіус сфери': str(self.sphere_radius),
+                                        'висота сегменту': str(self.sphere_segment_height),
+                                        'об\'єм сфери': str(self.sphere_volume),
+                                        'площа поверхні сфери': str(self.sphere_surface_square),
+                                        'площа поверхні сегменту сфери': str(self.sphere_segment_surface_square),
+                                        'об\'єм сегменту сфери': str(self.sphere_segment_volume)
                     }
                 }
 

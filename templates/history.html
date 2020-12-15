@@ -6,6 +6,7 @@
 
     <body>
 
+        
         <div class="header">
            
             <div class="nav_buttons">
@@ -18,11 +19,7 @@
                     <a href="{{url_for('history')}}">Мої проходження</a>
                 </div>
 
-                {% if user.find_by_id(current_user.get_id()).user_access_level == 'admin' %}
-                <div class="create_tasks_button">
-                    <a href="{{ url_for('create_pull_of_tasks') }}">Додати набір завдань</a>
-                </div>
-                {% endif %}
+                
 
                 {% if user.find_by_id(current_user.get_id()).user_access_level == 'expert' %}
                 <div class="add_new_task">
@@ -51,17 +48,30 @@
                 {% endif %}
             </div>
         </div>
+        
 
-
-        <div class="index_title">
-            <h1> Вітання! </h1>
+        <div class="name_of_results">
+            <h1>Історія проходження тестувань</h1>
         </div>
 
-        <div class="start_testing">
-            <div class="start_button">
-            <a href="{{ url_for('solve_tasks') }}">Розпочати тестування</a>
-            </div>
+        <div class="history_block">
+
+            
+            {% for pull in tasks %}
+
+                <div class="pull_of_tasks">
+                    {{ pull.user_id }}</br>
+                    {{ pull.date_of_pass }}
+                </div>
+
+            {% endfor %}
         </div>
+        
+        
+        
+       
+
+
 
     </body>
 </html>

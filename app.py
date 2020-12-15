@@ -6,6 +6,7 @@ from datetime import datetime
 from db import db
 from models.user import UserModel
 from models.tasks import TaskModel
+from models.user_progress import ProgressModel
 
 from logic_algorithms.geometry import GeometrySolutions, Rectangle, Circle, Parallelepiped, Sphere
 from processing.creating_tasks import CreateTasks
@@ -88,9 +89,9 @@ def index():
 
     #print(test_tasks.task_parser())
 
-    for problem in test_tasks.task_parser():
-        print(problem)
-        print(len(problem))
+    #for problem in test_tasks.task_parser():
+    #    print(problem)
+    #    print(len(problem))
         
         #
         #adding tasks to db
@@ -103,7 +104,7 @@ def index():
 
 
 
-    return render_template('index.html', cube_params=cube_params)
+    return render_template('index.html', cube_params=cube_params, user=UserModel(), validate_user=load_user(current_user.get_id()))
 
 
 @app.route('/tasks')
@@ -130,7 +131,7 @@ def solved_tasks():
 
     print(finals)
 
-    session['chosen_answers'] = answer_dict
+    session['chosen_answers'] = finals
 
     if request.method == 'POST':
         return redirect(url_for('show_results'))
@@ -141,7 +142,7 @@ def show_results():
     
     print(session['chosen_answers'])
 
-    return render_template('results.html', chosen_answers=session['chosen_answers'])
+    return render_template('results.html', chosen_answers=session['chosen_answers'], user=UserModel(), validate_user=load_user(current_user.get_id()))
 
 
 @app.route('/user_page', methods=['GET'])
@@ -151,7 +152,130 @@ def my_actions():
     return render_template('my_page.html', user=UserModel(), validate_user=load_user(current_user.get_id()))
 
 
+@app.route('/save_results_to_db', methods=['POST'])
+@login_required
+def save_results_to_db():
 
+    input_data = session['chosen_answers']
+    date = datetime.now()
+    
+    for row in input_data:
+        
+        input_task = ProgressModel(**row, date_of_pass=date, user_id=current_user.get_id())
+        input_task.save_to_db()
+    
+    print('----------------------------------------------------------------------------')
+    print(input_data)
+
+    return redirect(url_for('history'))
+
+@app.route('/tries_history')
+@login_required
+def history():
+    return render_template('history.html', user=UserModel(), validate_user=load_user(current_user.get_id()))
+
+
+def permission_required(permission):
+    def decorator(f):
+        def decorated_function(*args, **kwargs):
+            user = UserModel.find_by_id(current_user.get_id()).user_access_level
+            print(user)
+            if user != permission:
+                return redirect(url_for('login_page'))
+                flash("You have no access!!!")
+            else:
+                return f(*args, **kwargs)
+        return decorated_function
+    return decorator
+
+
+@app.route('/create_tasks', methods=['GET', 'POST'])
+@login_required
+def create_pull_of_tasks():
+
+    if request.method == 'POST':
+        tasks_to_create = request.form.get('count')
+
+        tasks = CreateTasks(int(tasks_to_create))
+
+        
+        for problem in tasks.task_parser():
+        #
+        #adding tasks to db
+        #  
+            task = TaskModel(*problem, user_id=current_user.get_id())
+            task.save_task_to_db()
+        
+        return redirect(url_for('index'))
+    
+    elif request.method == 'GET':
+        if UserModel.find_by_id(current_user.get_id()).user_access_level == 'admin':
+            return render_template('create_pull_of_tasks.html', user=UserModel(), validate_user=load_user(current_user.get_id()))
+        else:
+            return redirect(url_for('index'))
+            
+
+
+@app.route('/add_task')
+def create_new_task():
+    return render_template('create_new_task.html')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login_page():
+    login = request.form.get('login')
+    password = request.form.get('password')
+
+    if login and password:
+        user = UserModel.find_by_login(login)
+
+        if user and check_password_hash(user.user_password, password):
+            login_user(user)
+
+            next_page = request.args.get('next')
+
+            if next_page == None:
+                return redirect(url_for('index'))
+            return redirect(next_page)
+        else:
+            flash("Login or password is not correct!")
+    else:
+        flash("Please, fill login and password fields!")
+    return render_template('login.html')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    login = request.form.get('login')
+    password = request.form.get('password')
+    password2 = request.form.get('password2')
+
+    if request.method == 'POST':
+        if not login or not password or not password2:
+            flash("Please, fill all the fields!")
+        elif password != password2:
+            flash("Passwords are not equal!")
+        else:
+            hash_pwd = generate_password_hash(password)
+            new_user = UserModel(user_login=login, user_password=hash_pwd, user_access_level='simple_user')
+
+            new_user.save_to_db()
+
+            return redirect(url_for('login_page'))
+    return render_template('register.html')
+
+
+@app.route('/logout', methods=['GET', 'POST'])
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
+
+@app.after_request
+def redirect_to_signin(response):
+    if response.status_code == 401:
+        return redirect(url_for('login_page') + '?next=' + request.url)
+    return response
 
 if __name__ == '__main__':
     db.init_app(app)
