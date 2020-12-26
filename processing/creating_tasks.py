@@ -112,8 +112,6 @@ class CreateTasks():
             for item in temp[4:6]:
                 new_task.append(item)
             
-            
-            
             temp.clear()
             temp.append(new_task[-1])
 
