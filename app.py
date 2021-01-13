@@ -5,7 +5,7 @@ from flask_login import LoginManager, login_user, logout_user, login_required, c
 from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 
-from db import db
+#from db import db
 from models.user import UserModel
 from models.tasks import TaskModel
 from models.user_progress import ProgressModel
@@ -455,5 +455,5 @@ def redirect_to_signin(response):
     return response
 
 if __name__ == '__main__':
-    db.init_app(app)
+    #db.init_app(app)
     app.run(port=5000, debug=True)
