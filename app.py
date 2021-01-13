@@ -27,9 +27,9 @@ manager = LoginManager(app)
 def load_user(user_id):
     return UserModel.query.get(user_id)
 
-@app.before_first_request
-def create_tables():
-    db.create_all()
+#@app.before_first_request
+#def create_tables():
+#    db.create_all()
 
     #admin_user = UserModel(user_login='admin', user_password=generate_password_hash('admin'), user_access_level='admin')
     #admin_user.save_to_db()
