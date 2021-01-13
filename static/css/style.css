@@ -384,3 +384,118 @@ body{
     color: white;
     font-size: 25;
 }
+
+/*------------------add new task page-------------------*/
+
+.new_task_body{
+    
+}
+
+.new_task_body .new_task_description{
+    text-align: center;
+}
+
+.new_task_body .add_new_task_button{
+    position: relative;
+    left: 15%;
+}
+
+.new_task_description textarea{
+    width: 70%;
+    height: 20%;
+    font-size: 20px;
+    border-radius: 15px;
+}
+
+.new_answer h3{
+    position: relative;
+    left: 15%;
+}
+
+.new_answer input{
+    position: relative;
+    left: 15%;
+    font-size: large;
+    width: 15%;
+    height: 5%;
+    border-radius: 15px;
+}
+
+.new_correct_answer h3{
+    position: relative;
+    left: 15%;
+}
+
+.new_correct_answer input{
+    position: relative;
+    left: 15%;
+    font-size: large;
+    width: 15%;
+    height: 5%;
+    border-radius: 15px;
+}
+
+.add_new_task_button{
+    padding-top: 60px;
+}
+
+.add_new_task_button button{
+    width: 180px;
+    height: 50px;
+    font-size: 20;
+}
+
+hr{
+    background-color: black;
+    color: black;
+    border: none;
+    height: 2px;
+}
+
+.pull_of_tasks h4{
+
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.pull_of_tasks button{
+    color: blue;
+    margin: 0px;
+    padding: 0px;
+    background-color: #e4ffd9;
+    border-style: none;
+    border-color: none;
+    border-radius: 15px;
+}
+
+.user_table{
+    text-align: center;
+}
+
+.user_table p{
+    font-size: 20px;
+}
+
+.user_table button{
+    padding: 0px;
+    margin: 0px;
+}
+
+.edit_block{
+    text-align: center;
+}
+
+.new_access_level select{
+    width: 15%;
+    height: 5%;
+    font-size: large;
+    border-radius: 15px;
+    border-width: 3px;
+    border-color: black;
+}
+
+.edit_this_user{
+    text-align: center;
+    position: relative;
+    
+}

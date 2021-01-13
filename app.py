@@ -1,3 +1,5 @@
+import random
+
 from flask import Flask, request, redirect, render_template, url_for, flash, session
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -9,7 +11,8 @@ from models.tasks import TaskModel
 from models.user_progress import ProgressModel
 
 from logic_algorithms.geometry import GeometrySolutions, Rectangle, Circle, Parallelepiped, Sphere
-from processing.creating_tasks import CreateTasks
+from logic_algorithms.algebra import QuadraticEquation
+from processing.creating_tasks import CreateTasks, CreateAlgebraTasks, CreateQuadraticEquationTasks, CreateArithmeticalProgressionTasks
 
 
 app = Flask(__name__)
@@ -24,14 +27,29 @@ manager = LoginManager(app)
 def load_user(user_id):
     return UserModel.query.get(user_id)
 
-    
-    #admin_user = UserModel(user_login='admin', user_password='admin', user_access_level='admin')
+@app.before_first_request
+def create_tables():
+    db.create_all()
+
+    #admin_user = UserModel(user_login='admin', user_password=generate_password_hash('admin'), user_access_level='admin')
     #admin_user.save_to_db()
+    #expert_user = UserModel(user_login='expert', user_password=generate_password_hash('expert'), user_access_level='expert')
+    #expert_user.save_to_db()
+
 
 @app.route('/')
 def index():
 
+    new_try = QuadraticEquation(5, 3, 7)
+
+    #print(new_try.diskrimenant)
     
+    testing_tasks = CreateAlgebraTasks(5)
+
+    
+    
+
+
     cube_params = GeometrySolutions.cube(cube_edge=5)
     # print(cube_params)
     
@@ -111,9 +129,11 @@ def solve_tasks():
     
     #new_tasks = CreateTasks.output_task_parser(tasks)
 
-    print(tasks)
+    #print(tasks)
 
-    return render_template('solve_tasks.html', tasks=tasks, user=UserModel(), validate_user=load_user(current_user.get_id()))
+    #print(random.sample(tasks, 20))
+
+    return render_template('solve_tasks.html', tasks=random.sample(tasks, 20), user=UserModel(), validate_user=load_user(current_user.get_id()))
 
 
 @app.route('/solved_tasks', methods=['POST'])
@@ -121,12 +141,12 @@ def solved_tasks():
 
     answer_dict = {key:value for (key, value) in request.form.items()}
 
-    print(request.form)
-    print(answer_dict)
+    #print(request.form)
+    #print(answer_dict)
 
     finals = CreateTasks.results_parser(answer_dict)
 
-    print(finals)
+    #print(finals)
 
     session['chosen_answers'] = finals
 
@@ -137,7 +157,7 @@ def solved_tasks():
 @app.route('/results')
 def show_results():
     
-    print(session['chosen_answers'])
+    
 
     return render_template('results.html', chosen_answers=session['chosen_answers'], user=UserModel(), validate_user=load_user(current_user.get_id()))
 
@@ -157,26 +177,61 @@ def save_results_to_db():
     date = datetime.now()
     
     for row in input_data:
-        
-        input_task = ProgressModel(**row, date_of_pass=date, user_id=current_user.get_id())
+        #print(row)    
+        input_task = ProgressModel(
+                                    task_id=row['task_id'],
+                                    task_text=row['task_text'],
+                                    task_correct_answer=row['task_correct_answer'],
+                                    task_answer_1=row['task_answer_1'],
+                                    task_answer_2=row['task_answer_2'],
+                                    task_answer_3=row['task_answer_3'],
+                                    task_answer_4=row['task_answer_4'],
+                                    task_chosen_answer=row['task_chosen_answer'],
+                                    task_mark=row['task_mark'],
+                                    date_of_pass=date, 
+                                    user_id=current_user.get_id()
+                                )
         input_task.save_to_db()
     
     print('----------------------------------------------------------------------------')
-    print(input_data)
+    #print(input_data)
 
     return redirect(url_for('history'))
 
-@app.route('/tries_history')
+@app.route('/tries_history', methods=['GET', 'POST'])
 @login_required
 def history():
-    return render_template('history.html', user=UserModel(), validate_user=load_user(current_user.get_id()))
+
+    count_of_tasks = ProgressModel.get_all_statistics(current_user.get_id())
+
+    if request.method == 'GET':
+
+        return render_template('history.html', history=count_of_tasks, user=UserModel(), validate_user=load_user(current_user.get_id()))
+
+    elif request.method == 'POST':
+
+        date_of_solve = request.form.get('important_date')
+
+        return redirect(url_for('user_try', date_of_solve=date_of_solve))
+        
+
+@app.route('/user_try_for_<date_of_solve>', methods=['GET', 'POST'])
+@login_required
+def user_try(date_of_solve):
+
+    date_of_solve = date_of_solve
+
+    tasks = ProgressModel.get_all_tasks_by_user_date(user_id=current_user.get_id(), date_of_pass=date_of_solve)
+    
+    return render_template('history_user_try.html', user=UserModel(), history_of_user=tasks, date_of_solve=date_of_solve, validate_user=load_user(current_user.get_id()))
+
 
 
 def permission_required(permission):
     def decorator(f):
         def decorated_function(*args, **kwargs):
             user = UserModel.find_by_id(current_user.get_id()).user_access_level
-            print(user)
+            #print(user)
             if user != permission:
                 return redirect(url_for('login_page'))
                 flash("You have no access!!!")
@@ -194,14 +249,66 @@ def create_pull_of_tasks():
         tasks_to_create = request.form.get('count')
 
         tasks = CreateTasks(int(tasks_to_create))
+        roundation_tasks = CreateAlgebraTasks(int(tasks_to_create))
+        quadratic_equation_tasks = CreateQuadraticEquationTasks(int(tasks_to_create))
+        arithmetical_progression_tasks = CreateArithmeticalProgressionTasks(int(tasks_to_create))
 
         
         for problem in tasks.task_parser():
         #
         #adding tasks to db
         #  
-            task = TaskModel(*problem, user_id=current_user.get_id())
+            #print("PROBLEM-----------------------------")
+
+            #print(problem)
+
+            task = TaskModel(
+                                task_text=problem[0], 
+                                task_correct_answer=problem[1], 
+                                answer_1=problem[2], 
+                                answer_2=problem[3],
+                                answer_3=problem[4],
+                                answer_4=problem[5],
+                                user_id=current_user.get_id())
             task.save_task_to_db()
+        
+        #print(roundation_tasks.roundation_task_parser())
+        for problem in roundation_tasks.roundation_task_parser():
+            task = TaskModel(   
+                                task_text=problem['task_text'], 
+                                task_correct_answer=problem['task_correct_answer'], 
+                                answer_1=problem['answer_1'],
+                                answer_2=problem['answer_2'],
+                                answer_3=problem['answer_3'],
+                                answer_4=problem['answer_4'],
+                                user_id=current_user.get_id()
+                                )
+            task.save_task_to_db()
+
+        for problem in quadratic_equation_tasks.quadratic_equation_task_parser():
+            task = TaskModel(   
+                                task_text=problem['task_text'], 
+                                task_correct_answer=problem['task_correct_answer'], 
+                                answer_1=problem['answer_1'],
+                                answer_2=problem['answer_2'],
+                                answer_3=problem['answer_3'],
+                                answer_4=problem['answer_4'],
+                                user_id=current_user.get_id()
+                                )
+            task.save_task_to_db()
+
+        for problem in arithmetical_progression_tasks.arithmetical_progression_task_parser():
+            task = TaskModel(   
+                                task_text=problem['task_text'], 
+                                task_correct_answer=problem['task_correct_answer'], 
+                                answer_1=problem['answer_1'],
+                                answer_2=problem['answer_2'],
+                                answer_3=problem['answer_3'],
+                                answer_4=problem['answer_4'],
+                                user_id=current_user.get_id()
+                                )
+            task.save_task_to_db()
+
         
         return redirect(url_for('index'))
     
@@ -213,9 +320,82 @@ def create_pull_of_tasks():
             
 
 
-@app.route('/add_task')
+@app.route('/add_task', methods=['GET', 'POST'])
 def create_new_task():
-    return render_template('create_new_task.html')
+
+    if request.method == 'POST':
+        
+        new_task = request.form
+
+        #print(new_task.keys())
+
+        task_to_add = TaskModel(
+                                    task_text=request.form.get('new_task_description'), 
+                                    task_correct_answer=request.form.get('new_correct_answer'),
+                                    answer_1=request.form.get('new_answer_1'),
+                                    answer_2=request.form.get('new_answer_2'),
+                                    answer_3=request.form.get('new_answer_3'),
+                                    answer_4=request.form.get('new_answer_4'),
+                                    user_id=current_user.get_id())
+        task_to_add.save_task_to_db()
+
+        return redirect(url_for('index'))
+
+    elif request.method == 'GET':
+        return render_template('create_new_task.html', user=UserModel(), validate_user=load_user(current_user.get_id()))
+
+
+@app.route('/user_management')
+def admin_user_management():
+
+    #new_tasks = TaskModel(task_text='Дано квадратне рiвняння 5x^2 + 8x + 2 = 0. Знайти коренi рiвняння', task_correct_answer='x1 = -1.2 x2 = -0.3', answer_1='x1 = -1.2 x2 = -0.3', answer_2='x1 = 5.3 x2 = -8.1', answer_3='x1 = -2.1 x2 = 3', answer_4='Коренiв немає', user_id=1)
+    #new_tasks.save_task_to_db()
+
+    users = UserModel.get_all_users()
+
+    return render_template('admin_user_management.html', users=users, user=UserModel(), validate_user=load_user(current_user.get_id()))
+
+
+@app.route('/edit_user', methods=['GET', 'POST'])
+def admin_edit_user():
+
+    editable_user_id = request.args.get('user_id')
+
+    
+
+    if request.method == 'GET':
+        
+        user = UserModel.find_by_id(request.args.get('user_id'))
+
+
+
+
+        return render_template('admin_user_edit.html', user_info=user, user=UserModel(), validate_user=load_user(current_user.get_id()))
+
+    elif request.method == 'POST':
+
+    
+        print(request.form.get('access_types'))
+
+        print(request.form.get('editable_user_id'))
+
+        user =UserModel.find_by_id(request.form.get('editable_user_id'))
+
+        user.edit_user(request.form.get('access_types'))
+
+        return redirect(url_for('admin_user_management'))
+        
+
+
+
+
+@app.route('/delete_user', methods=['POST'])
+def admin_delete_user():
+
+    print(request.form.get('delete_user'))
+    UserModel.delete_user(request.form.get('delete_user'))
+
+    return redirect(url_for('admin_user_management'))
 
 
 @app.route('/login', methods=['GET', 'POST'])

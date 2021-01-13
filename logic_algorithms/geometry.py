@@ -57,11 +57,11 @@ class Rectangle():
                     'problem': 'Дано прямокутник з наступними характеристиками:',
                     'figure_specs': 
                                     {
-                                        'довжина': str(self.rectangle_length),
-                                        'ширина': str(self.rectangle_width),
-                                        'площа': str(self.rectangle_square),
-                                        'діагональ': str(self.rectangle_diagonal),
-                                        'периметр': str(self.rectangle_perimeter)
+                                        'довжина': str(round(self.rectangle_length, 2)),
+                                        'ширина': str(round(self.rectangle_width, 2)),
+                                        'площа': str(round(self.rectangle_square, 2)),
+                                        'діагональ': str(round(self.rectangle_diagonal, 2)),
+                                        'периметр': str(round(self.rectangle_perimeter, 2))
                     }
                 }
 
@@ -94,9 +94,9 @@ class Circle():
                     'problem': 'Дано коло з наступними характеристиками:',
                     'figure_specs': 
                                     {
-                                        'радіус кола': str(self.circle_radius),
-                                        'площа кола': str(self.circle_square),
-                                        'довжина кола': str(self.circle_length)
+                                        'радіус кола': str(round(self.circle_radius, 2)),
+                                        'площа кола': str(round(self.circle_square, 2)),
+                                        'довжина кола': str(round(self.circle_length, 2))
                     }
                 }
 
@@ -123,8 +123,8 @@ class Ellipse():
                     'problem': 'Дано Еліпс з наступними характеристиками:',
                     'figure_specs': 
                                     {
-                                        'ellipse_horizontal_half_axis': str(self.horizontal_half_axis),
-                                        'ellipse_vertical_half_axis': str(self.vertical_half_axis)
+                                        'ellipse_horizontal_half_axis': str(round(self.horizontal_half_axis, 2)),
+                                        'ellipse_vertical_half_axis': str(round(self.vertical_half_axis, 2))
                     }
                 }
 
@@ -159,16 +159,16 @@ class Parallelepiped():
                     'problem': 'Дано Параллелепіпед з наступними характеристиками:',
                     'figure_specs': 
                                     {
-                                        'довжина': str(self.parallelepiped_length),
-                                        'ширина': str(self.parallelepiped_width),
-                                        'висота': str(self.parallelepiped_height),
-                                        'площа верхньої сторони': str(self.parallelepiped_top_side_square),
-                                        'площа передньої сторони': str(self.parallelepiped_front_side_square),
-                                        'площа бокової сторони': str(self.parallelepiped_side_square),
-                                        'діагональ верхньої сторони': str(self.parallelepiped_top_side_diagonal),
-                                        'діагональ передньої сторони': str(self.parallelepiped_front_side_diagonal),
-                                        'діагональ бокової сторони': str(self.parallelepiped_side_diagonal),
-                                        'об\'єм': str(self.parallelepiped_volume)
+                                        'довжина': str(round(self.parallelepiped_length, 2)),
+                                        'ширина': str(round(self.parallelepiped_width, 2)),
+                                        'висота': str(round(self.parallelepiped_height, 2)),
+                                        'площа верхньої сторони': str(round(int(self.parallelepiped_top_side_square), 2)),
+                                        'площа передньої сторони': str(round(int(self.parallelepiped_front_side_square), 2)),
+                                        'площа бокової сторони': str(round(int(self.parallelepiped_side_square), 2)),
+                                        'діагональ верхньої сторони': str(round(int(self.parallelepiped_top_side_diagonal), 2)),
+                                        'діагональ передньої сторони': str(round(int(self.parallelepiped_front_side_diagonal), 2)),
+                                        'діагональ бокової сторони': str(round(int(self.parallelepiped_side_diagonal), 2)),
+                                        'об\'єм': str(round(int(self.parallelepiped_volume), 2))
                     }
                 }
 
@@ -216,12 +216,12 @@ class Sphere():
                     'problem': 'Дано Сферу з наступними характеристиками:',
                     'figure_specs': 
                                     {
-                                        'радіус сфери': str(self.sphere_radius),
-                                        'висота сегменту': str(self.sphere_segment_height),
-                                        'об\'єм сфери': str(self.sphere_volume),
-                                        'площа поверхні сфери': str(self.sphere_surface_square),
-                                        'площа поверхні сегменту сфери': str(self.sphere_segment_surface_square),
-                                        'об\'єм сегменту сфери': str(self.sphere_segment_volume)
+                                        'радіус сфери': str(round(self.sphere_radius, 2)),
+                                        'висота сегменту': str(round(self.sphere_segment_height, 2)),
+                                        'об\'єм сфери': str(round(self.sphere_volume, 2)),
+                                        'площа поверхні сфери': str(round(self.sphere_surface_square, 2)),
+                                        'площа поверхні сегменту сфери': str(round(self.sphere_segment_surface_square, 2)),
+                                        'об\'єм сегменту сфери': str(round(self.sphere_segment_volume, 2))
                     }
                 }
 

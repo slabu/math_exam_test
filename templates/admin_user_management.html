@@ -1,0 +1,121 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="{{ url_for( 'static', filename='css/style.css', v=8) }}">
+    </head>
+
+    <body>
+
+        
+        <div class="header">
+           
+            <div class="nav_buttons">
+                <div class="home_button">
+                    <a href="{{url_for('index')}}">Home</a>
+                </div>
+
+                
+                <div class="my_posts">
+                    <a href="{{url_for('history')}}">Мої проходження</a>
+                </div>
+
+                
+
+                {% if user.find_by_id(current_user.get_id()).user_access_level == 'expert' %}
+                <div class="add_new_task">
+                    <a href="{{ url_for('create_new_task') }}">Додати нове завдання</a>
+                </div>
+                {% endif %}
+
+
+            </div>
+            <div class="log_buttons">
+                {% if validate_user == None %}
+                <div class="register">
+                    <a href="{{url_for('register')}}">Реєстрація</a>
+                </div>
+                <div class="login">
+                    <a href="{{url_for('login_page')}}">Авторизація</a>
+                </div>
+                {% endif %}
+                {% if validate_user != None %}
+                <div class="logout">
+                    <a href="{{url_for('logout')}}">Вийти</a>
+                </div>
+                <div class="logged_in_user">
+                    Вітаємо, {{user.find_by_id(current_user.get_id()).user_login}}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+
+        <div class="name_of_results">
+            <h1>Перегляд усіх користувачів</h1>
+        </div>
+        
+        
+        
+
+        <div class="user_table">
+            <table border="3" cellpadding="5" cellspacing='0' bordercolor='black' align="center">
+                <tr>
+                    <td>
+                        <b><h3> id </h3></b>
+                    </td>
+                    
+                    <td>
+                        <b><h3> логін </h3></b>
+                    </td>
+
+                    <td>
+                        <b><h3> рівень доступу </h3></b>
+                    </td>
+
+                    <td>
+                        <b><h3> редагування </h3></b>
+                    </td>
+
+                    <td>
+                        <b><h3> видалення </h3></b>
+                    </td>
+                </tr>
+                {% for user in users %}
+                    
+                    <tr>
+                        <td>
+                            <p>{{ user.user_id }}</p>
+                        </td> 
+                        <td> 
+                            <p>{{ user.user_login }}</p>
+                        </td>
+                        <td> 
+                            <p>{{ user.user_access_level }}</p>
+                        </td>
+                        <td>
+                            <a href="{{url_for('admin_edit_user', user_id=user.user_id)}}"><p>Редагувати рівень доступу</p></a>
+                        </td> 
+                        <td>
+                            <form method="POST" action="delete_user">
+                                <input type="hidden" name="delete_user" value="{{ user.user_id }}">
+                                <button type="submit"><p>Видалити</p></button>
+                            </form>
+                            
+                        </td> 
+                    </tr>
+
+                {% endfor %}
+            </table>
+        </div>
+
+        
+
+        
+
+        
+       
+
+
+
+    </body>
+</html>

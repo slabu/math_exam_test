@@ -55,7 +55,7 @@
         
 
         <div class="name_of_results">
-            <h1>Результати проходження завдань</h1>
+            <h1>Результати проходження завдань за {{ history_of_user[0].date_of_pass }}</h1>
         </div>
         
         
@@ -64,7 +64,7 @@
 
         <div class="tasks_list">
 
-            {% for task in chosen_answers %}
+            {% for task in history_of_user %}
             <div class="task_body">
                 <div class="task_problem">
                     <h2> {{ task.task_text }} </h2>
@@ -110,15 +110,6 @@
             {% endfor %}
             
         </div>
-
-        <div class="save_button">
-            <div class="save_results_button">
-                <form method="post" action="save_results_to_db">
-                    <button type="submit">Зберегти результати</button>
-                </form>
-            </div>
-        </div>
-
         
        
 

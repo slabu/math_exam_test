@@ -51,51 +51,46 @@
         
 
         <div class="name_of_results">
-            <h1>Створення нового завдання</h1>
+            <h1>Редагування рівня доступу користувача</h1>
+        </div>
+
+        <div class="edit_block">
+        
+            <div class="user_login">
+                <h2>Логін користувача: {{ user_info.user_login }}</h2>
+            </div>
+
+            <div class="current_user_access_level">
+                <h2>Поточний рівень доступу: {{ user_info.user_access_level }}</h2>
+            </div>
+
+            <div class="new_access_level">
+                <h2>Оберіть новий рівень доступу</h2>
+
+                <form method="POST" action="edit_user">
+                    <input type="hidden" name="editable_user_id" value="{{ user_info.user_id }}">
+                <select name="access_types">
+                
+                
+                 <option value="admin">Адміністратор</option>
+                 <option value="expert">Експерт</option>
+                 <option value="simple_user">Простий користувач</option>
+
+               
+                </select>
+
+                <button type="submit" name="edit_this_user"><h1>Редагувати</h1></button>
+                </form>
+            </div>
+
         </div>
         
-        
-        <form method="post" action="add_task">
 
-        <div class="new_task_body">
-            <div class="new_task_description">
-                <h2>Опис задачі:</h2>
-                <textarea name="new_task_description"></textarea>
-            </div>
-
-            <div class="new_answer">
-                <h3>Варіант відповіді 1:</h3>
-                <input type="text" name="new_answer_1">
-            </div>
-
-            <div class="new_answer">
-                <h3>Варіант відповіді 2:</h3>
-                <input type="text" name="new_answer_2">
-            </div>
-
-            <div class="new_answer">
-                <h3>Варіант відповіді 3:</h3>
-                <input type="text" name="new_answer_3">
-            </div>
-
-            <div class="new_answer">
-                <h3>Варіант відповіді 4:</h3>
-                <input type="text" name="new_answer_4">
-            </div>
-
-            <div class="new_correct_answer">
-                <h3>Правильний варіант відповіді:</h3>
-                <input type="text" name="new_correct_answer">
-            </div>
-
-            
         
 
-            <div class="add_new_task_button">
-                <button type="submit">Додати задачу</button>
-            </div>
-        </div>
-        </form>
+        
+
+        
 
         
        

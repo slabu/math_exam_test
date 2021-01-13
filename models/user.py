@@ -26,6 +26,20 @@ class UserModel(db.Model, UserMixin):
         username = UserModel.query.filter_by(user_id=current_user.get_id()).first()
         return username.user_login
 
+    @classmethod
+    def get_all_users(cls):
+        return UserModel.query.all()
+
+    @classmethod
+    def delete_user(cls, user_id):
+        UserModel.query.filter_by(user_id=user_id).delete()
+        db.session.commit()
+        return True
+
+    def edit_user(self, new_access_level):
+        self.query.filter(UserModel.user_id==self.user_id).update({'user_access_level': new_access_level})
+        db.session.commit()
+
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
