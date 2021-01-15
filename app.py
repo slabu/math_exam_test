@@ -133,7 +133,7 @@ def solve_tasks():
 
     #print(random.sample(tasks, 20))
 
-    return render_template('solve_tasks.html', tasks=random.sample(tasks, 1), user=UserModel(), validate_user=load_user(current_user.get_id()))
+    return render_template('solve_tasks.html', tasks=random.sample(tasks, 20), user=UserModel(), validate_user=load_user(current_user.get_id()))
 
 
 @app.route('/solved_tasks', methods=['POST'])
