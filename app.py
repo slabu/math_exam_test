@@ -5,7 +5,7 @@ from flask_login import LoginManager, login_user, logout_user, login_required, c
 from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 
-from db import db
+#from db import db
 from models.user import UserModel
 from models.tasks import TaskModel
 from models.user_progress import ProgressModel
@@ -27,9 +27,9 @@ manager = LoginManager(app)
 def load_user(user_id):
     return UserModel.query.get(user_id)
 
-@app.before_first_request
-def create_tables():
-    db.create_all()
+#@app.before_first_request
+#def create_tables():
+#    db.create_all()
 
     #admin_user = UserModel(user_login='admin', user_password=generate_password_hash('admin'), user_access_level='admin')
     #admin_user.save_to_db()
@@ -455,5 +455,5 @@ def redirect_to_signin(response):
     return response
 
 if __name__ == '__main__':
-    db.init_app(app)
+    #db.init_app(app)
     app.run(port=5000, debug=True)

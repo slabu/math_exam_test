@@ -7,7 +7,7 @@ db.init_app(app)
 def create_tables():
     db.create_all()
 
-    admin_user = UserModel(user_login='admin', user_password='admin', user_access_level='admin')
-    expert_user = UserModel(user_login='expert', user_password='expert', user_access_level='expert')
-    admin_user.save_to_db()
-    expert_user.save_to_db()
+    #admin_user = UserModel(user_login='admin', user_password='admin', user_access_level='admin')
+    #expert_user = UserModel(user_login='expert', user_password='expert', user_access_level='expert')
+    #admin_user.save_to_db()
+    #expert_user.save_to_db()
